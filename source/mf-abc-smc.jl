@@ -15,9 +15,5 @@ include("density.jl")
 end
 
 using .MFABCSMC
-#include("toy.jl")
-#include("brn.jl")
-#using .BiochemicalReactionNetwork
-#include("brn-chain.jl")
-#include("kuramoto.jl")
-#using .KuramotoOscillators
+
+include("examples\kuramoto.jl")
