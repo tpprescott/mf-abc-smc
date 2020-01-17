@@ -1,4 +1,4 @@
-@everywhere include("../../source/MF-ABCSMC.jl")
+@everywhere include("../../source/mf-abc-smc.jl")
 
 using .KuramotoOscillators
 using StatsPlots, LaTeXStrings, Roots

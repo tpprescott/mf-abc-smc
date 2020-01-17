@@ -16,4 +16,4 @@ end
 
 using .MFABCSMC
 
-include("examples\kuramoto.jl")
+include("examples/kuramoto.jl")
