@@ -673,13 +673,13 @@ The results in \Cref{fig:negative_mixture} demonstrate that we can sample from a
 \begin{figure}
 \centering
 \begin{subfigure}[b]{0.48\textwidth}
- \includegraphics[width=\textwidth]{negative_mixture_A.png}
+ \includegraphics[width=\textwidth]{negative_mixture_A}
  \caption{Sampling from $\hat h_{\phi_0} \propto h_{\phi_0} = \max(0,h)$.}
  \label{fig:negative_mixture_A}
 \end{subfigure}
 ~
 \begin{subfigure}[b]{0.48\textwidth}
- \includegraphics[width=\textwidth]{negative_mixture_B.png}
+ \includegraphics[width=\textwidth]{negative_mixture_B}
  \caption{Sampling from $\hat h_{\phi_1} \propto h_{\phi_1} = \max(0.3f, h)$.}
  \label{fig:negative_mixture_B}
 \end{subfigure}
@@ -757,7 +757,7 @@ One obvious such scenario is when there are no negative weights in the Monte Car
 
 \begin{figure}
 \centering
-\includegraphics[width=0.95\columnwidth]{negative_mixture_q.png}
+\includegraphics[width=0.95\columnwidth]{negative_mixture_q}
 \caption{
 Sampling from \Cref{NegativeResample} for $\hat r$ given by \Cref{eq:DefensiveImportance}, formed from four parameter values $\theta_n \in \{-0.5, 0, 0.5, 1\}$ with corresponding weights $w_n \in \{2, 1, 1, -0.75\}$. 
 The perturbation kernels $K(\cdot~|~\theta_n)$ are Gaussian, centred at $\theta_n$ with standard deviation $0.4$.
@@ -1098,11 +1098,11 @@ The likelihood of the observed data under the model in \Cref{eq:Kuramoto_hi} wit
 \begin{figure}
 \centering
 \begin{subfigure}[b]{0.48\textwidth}
- \includegraphics[width=\textwidth]{exampletraj_R.png}
+ \includegraphics[width=\textwidth]{exampletraj_R}
 \end{subfigure}
 ~
 \begin{subfigure}[b]{0.48\textwidth}
- \includegraphics[width=\textwidth]{exampletraj_Phi.png}
+ \includegraphics[width=\textwidth]{exampletraj_Phi}
 \end{subfigure}
 \caption{
 In colour are five trajectories for $R(t)$ and $\Phi(t)$ for the high-fidelity model in \Cref{eq:Kuramoto_hi}. Stochasticity arises from sampling $\omega_i \sim \mathrm{Cauchy}(\omega_0, \gamma)$ for $i = 1,\dots, 256$. 
@@ -1212,7 +1212,7 @@ Since the final generation has a stopping condition where the effective sample s
 
 \begin{figure}
 \centering
-\includegraphics[width=0.95\columnwidth]{efficiencies_smc.png}
+\includegraphics[width=0.95\columnwidth]{efficiencies_smc}
 \caption{
 Observed efficiencies of generating samples from $p_{0.1}((K, \omega_0, \gamma)~|~\obs y)$ using 50 independent replicates each of \Cref{ABC:SMC} (ABC-SMC) and \Cref{MFABC:SMC} (MF-ABC-SMC), measured as the ESS of the sample $\{(K, \omega_0, \gamma)_n^{(8)}, w_n^{(8)}\}$ divided by the total simulation time across all eight generations.
 }
@@ -1231,7 +1231,7 @@ Note that, in addition to the analysis of the posterior means, we have also depi
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{estimates_gen8.png}
+\includegraphics[width=\textwidth]{estimates_gen8}
 \caption{
 The empirical posterior means of each of $K$, $\omega_0$ and $\gamma$ for each of the 100 samples, plotted against the total simulation time required to generate each mean.
 }
@@ -1250,7 +1250,7 @@ Hence, the benefit of MF-ABC-SMC appears to accrue most significantly in the ear
 
 \begin{figure}
 \centering
-\includegraphics[width=0.95\columnwidth]{eff_per_gen.png}
+\includegraphics[width=0.95\columnwidth]{eff_per_gen}
 \caption{
 Observed efficiencies of generating samples from $p_{\epsilon_t}((K, \omega_0, \gamma)~|~\obs y)$ at each generation, measured as the ESS of that generation's sample divided by the total simulation time for that generation.
 Note that the vertical axis is on a logarithmic scale.
@@ -1267,7 +1267,7 @@ This implies that, in the later generations, any $\tilde y \in \Omega_{\epsilon_
 
 \begin{figure}
 \centering
-\includegraphics[width=0.95\columnwidth]{etas_gen.png}
+\includegraphics[width=0.95\columnwidth]{etas_gen}
 \caption{
 Estimated values of the optimal continuation probabilities $\alpha = \eta_1 \mathbb I(\tilde y \in \Omega_{\epsilon_t}) + \eta_2 \mathbb I(\tilde y \notin \Omega_{\epsilon_t})$ used to produce the multifidelity sample for each of the 50 replicates of generations 2, 4, 6 and 8.
 }
@@ -1292,13 +1292,13 @@ In practice, we work with the approximation to $\psi$ found by using the estimat
 \begin{figure}
 \centering
 \begin{subfigure}[b]{0.48\textwidth}
- \includegraphics[width=\textwidth]{adaptive_epsilon.png}
+ \includegraphics[width=\textwidth]{adaptive_epsilon}
  \caption{Adaptive ABC-SMC.}
  \label{fig:adaptive_epsilon}
 \end{subfigure}
 ~
 \begin{subfigure}[b]{0.48\textwidth}
- \includegraphics[width=\textwidth]{adaptive_epsilon_eta.png}
+ \includegraphics[width=\textwidth]{adaptive_epsilon_eta}
  \caption{Adaptive MF-ABC-SMC.}
  \label{fig:adaptive_epsilon_eta}
 \end{subfigure}
@@ -1478,7 +1478,7 @@ Running the adaptive extensions of each of \Cref{ABC:SMC,MFABC:SMC} for four gen
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=\textwidth]{posterior_abc_rs.png}
+\includegraphics[width=\textwidth]{posterior_abc_rs}
 \caption{
 Sample from ABC posterior generated by \Cref{ABC:Rejection}.
 }
@@ -1487,7 +1487,7 @@ Sample from ABC posterior generated by \Cref{ABC:Rejection}.
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=\textwidth]{posterior_abc_smc.png}
+\includegraphics[width=\textwidth]{posterior_abc_smc}
 \caption{
 Sample from ABC posterior produced using the final generation of \Cref{ABC:SMC}.
 }
@@ -1496,7 +1496,7 @@ Sample from ABC posterior produced using the final generation of \Cref{ABC:SMC}.
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=\textwidth]{posterior_mfabc_rs.png}
+\includegraphics[width=\textwidth]{posterior_mfabc_rs}
 \caption{
 Sample from ABC posterior generated by \Cref{MFABC:Rejection}.
 }
@@ -1505,7 +1505,7 @@ Sample from ABC posterior generated by \Cref{MFABC:Rejection}.
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=\textwidth]{posterior_abc_smc_ESS400.png}
+\includegraphics[width=\textwidth]{posterior_abc_smc_ESS400}
 \caption{
 Sample from ABC posterior produced using the final generation of \Cref{ABC:SMC}.
 }
@@ -1514,7 +1514,7 @@ Sample from ABC posterior produced using the final generation of \Cref{ABC:SMC}.
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=\textwidth]{posterior_mfabc_smc_ESS400.png}
+\includegraphics[width=\textwidth]{posterior_mfabc_smc_ESS400}
 \caption{
 Sample from ABC posterior produced using the final generation of \Cref{MFABC:SMC}.
 }
@@ -1524,7 +1524,7 @@ Sample from ABC posterior produced using the final generation of \Cref{MFABC:SMC
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=\textwidth]{posterior_abc_smc_adaptive.png}
+\includegraphics[width=\textwidth]{posterior_abc_smc_adaptive}
 \caption{
 Sample from ABC posterior produced by the final generation of the adaptive modification of \Cref{ABC:SMC}, as described in \Cref{s:Adaptive}.
 }
@@ -1533,7 +1533,7 @@ Sample from ABC posterior produced by the final generation of the adaptive modif
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=\textwidth]{posterior_mfabc_smc_adaptive.png}
+\includegraphics[width=\textwidth]{posterior_mfabc_smc_adaptive}
 \caption{
 Sample from ABC posterior produced by the final generation of the adaptive modification of \Cref{MFABC:SMC}, as described in \Cref{s:Adaptive}.
 }
