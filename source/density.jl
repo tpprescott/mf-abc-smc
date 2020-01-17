@@ -66,7 +66,7 @@ function plot_densities(
     w = getweight.(C)
     filter!(!iszero, w)
 
-    save("./"*fn*".jld",
+    save("./data/"*fn*".jld",
     "theta", theta,
     "w", w,
     "ϵ", ϵ,
@@ -77,7 +77,7 @@ function plot_densities(
 end
 
 function plot_densities(fn::AbstractString, resolution::Int64...)
-    data = load(fn)
+    data = load("./data/"*fn*".jld")
     theta = data["theta"]
     w = data["w"]
     ϵ = data["ϵ"]
