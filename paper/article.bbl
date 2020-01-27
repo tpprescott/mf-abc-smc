@@ -1,0 +1,177 @@
+\begin{thebibliography}{10}
+
+\bibitem{Alsing2018}
+{\sc J.~Alsing, B.~D. Wandelt, and S.~M. Feeney}, {\em Optimal proposals for
+  approximate {Bayesian} computation},  (2018),
+  \url{https://arxiv.org/abs/http://arxiv.org/abs/1808.06040v1}.
+\newblock \url{http://arxiv.org/abs/1808.06040}.
+
+\bibitem{Beaumont2010}
+{\sc M.~A. Beaumont}, {\em Approximate {Bayesian} computation in evolution and
+  ecology}, Annual Review of Ecology, Evolution, and Systematics, 41 (2010),
+  pp.~379--406, \url{https://doi.org/10.1146/annurev-ecolsys-102209-144621}.
+
+\bibitem{Beaumont2009}
+{\sc M.~A. Beaumont, J.-M. Cornuet, J.-M. Marin, and C.~P. Robert}, {\em
+  Adaptive approximate {Bayesian} computation}, Biometrika, 96 (2009),
+  pp.~983--990, \url{https://doi.org/10.1093/biomet/asp052}.
+
+\bibitem{Julia}
+{\sc J.~Bezanson, A.~Edelman, S.~Karpinski, and V.~B. Shah}, {\em Julia: A
+  fresh approach to numerical computing}, SIAM Review, 59 (2017), pp.~65--98,
+  \url{https://doi.org/10.1137/141000671}.
+
+\bibitem{Croci2018}
+{\sc M.~Croci, M.~B. Giles, M.~E. Rognes, and P.~E. Farrell}, {\em Efficient
+  white noise sampling and coupling for multilevel {Monte Carlo} with
+  non-nested meshes},  (2018),
+  \url{https://arxiv.org/abs/http://arxiv.org/abs/1803.04857v2}.
+\newblock \url{http://arxiv.org/abs/1803.04857v2}.
+
+\bibitem{DelMoral2006}
+{\sc P.~{Del Moral}, A.~Doucet, and A.~Jasra}, {\em Sequential {Monte Carlo}
+  samplers}, Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology), 68 (2006), pp.~411--436,
+  \url{https://doi.org/10.1111/j.1467-9868.2006.00553.x}.
+
+\bibitem{DelMoral2012}
+{\sc P.~{Del~Moral}, A.~Doucet, and A.~Jasra}, {\em An adaptive sequential
+  {Monte Carlo} method for approximate {Bayesian} computation}, Statistics and
+  Computing, 22 (2012), pp.~1009--1020,
+  \url{https://doi.org/10.1007/s11222-011-9271-y}.
+
+\bibitem{Elvira2018}
+{\sc V.~Elvira, L.~Martino, and C.~P. Robert}, {\em Rethinking the effective
+  sample size},  (2018),
+  \url{https://arxiv.org/abs/http://arxiv.org/abs/1809.04129v1}.
+\newblock \url{http://arxiv.org/abs/1809.04129}.
+
+\bibitem{Everitt2017}
+{\sc R.~G. Everitt and P.~A. Rowi\'{n}ska}, {\em Delayed acceptance {ABC-SMC}},
+   (2017), \url{https://arxiv.org/abs/http://arxiv.org/abs/1708.02230v1}.
+\newblock \url{https://arxiv.org/abs/1708.02230}.
+
+\bibitem{Fearnhead2012}
+{\sc P.~Fearnhead and D.~Prangle}, {\em Constructing summary statistics for
+  approximate {Bayesian} computation: Semi-automatic approximate {Bayesian}
+  computation}, Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology), 74 (2012), pp.~419--474,
+  \url{https://doi.org/10.1111/j.1467-9868.2011.01010.x}.
+
+\bibitem{Filippi2013}
+{\sc S.~Filippi, C.~P. Barnes, J.~Cornebise, and M.~P.~H. Stumpf}, {\em On
+  optimality of kernels for approximate {Bayesian} computation using sequential
+  {Monte Carlo}}, Statistical Applications in Genetics and Molecular Biology,
+  12 (2013), \url{https://doi.org/10.1515/sagmb-2012-0069}.
+
+\bibitem{Giles2008}
+{\sc M.~B. Giles}, {\em Multilevel {Monte Carlo} path simulation}, Operations
+  Research, 56 (2008), pp.~607--617,
+  \url{https://doi.org/10.1287/opre.1070.0496}.
+
+\bibitem{Hannay2018}
+{\sc K.~M. Hannay, D.~B. Forger, and V.~Booth}, {\em Macroscopic models for
+  networks of coupled biological oscillators}, Science Advances, 4 (2018),
+  p.~e1701047, \url{https://doi.org/10.1126/sciadv.1701047}.
+
+\bibitem{Harrison2017a}
+{\sc J.~U. Harrison and R.~E. Baker}, {\em An automatic adaptive method to
+  combine summary statistics in approximate {Bayesian} computation}.
+\newblock arXiv 1703.02341v1, 2017, \url{https://arxiv.org/abs/1703.02341v1}.
+
+\bibitem{Hines2015}
+{\sc K.~E. Hines}, {\em A primer on {Bayesian} inference for biophysical
+  systems}, Biophysical Journal, 108 (2015), pp.~2103--2113,
+  \url{https://doi.org/10.1016/j.bpj.2015.03.042}.
+
+\bibitem{Jagiella2017}
+{\sc N.~Jagiella, D.~Rickert, F.~J. Theis, and J.~Hasenauer}, {\em
+  Parallelization and high-performance computing enables automated statistical
+  inference of multi-scale models}, Cell Systems, 4 (2017), pp.~194--206,
+  \url{https://doi.org/10.1016/j.cels.2016.12.002}.
+
+\bibitem{Lester2018}
+{\sc C.~Lester, C.~A. Yates, and R.~E. Baker}, {\em Robustly simulating
+  biochemical reaction kinetics using multi-level {Monte Carlo} approaches},
+  Journal of Computational Physics, 375 (2018), pp.~1401--1423,
+  \url{https://doi.org/10.1016/j.jcp.2018.06.045}.
+\newblock arXiv 1707.09284.
+
+\bibitem{Ott2008}
+{\sc E.~Ott and T.~M. Antonsen}, {\em Low dimensional behavior of large systems
+  of globally coupled oscillators}, Chaos: An Interdisciplinary Journal of
+  Nonlinear Science, 18 (2008), p.~037113,
+  \url{https://doi.org/10.1063/1.2930766}.
+
+\bibitem{Ott2009}
+{\sc E.~Ott and T.~M. Antonsen}, {\em Long time evolution of phase oscillator
+  systems}, Chaos: An Interdisciplinary Journal of Nonlinear Science, 19
+  (2009), p.~023117, \url{https://doi.org/10.1063/1.3136851}.
+
+\bibitem{Owen2013}
+{\sc A.~B. Owen}, {\em Monte Carlo theory, methods and examples}, 2013.
+
+\bibitem{Peherstorfer2018}
+{\sc B.~Peherstorfer, K.~Willcox, and M.~Gunzburger}, {\em Survey of
+  multifidelity methods in uncertainty propagation, inference, and
+  optimization}, SIAM Review, 60 (2018), pp.~550--591,
+  \url{https://doi.org/10.1137/16M1082469}.
+
+\bibitem{Picchini2016}
+{\sc U.~Picchini and J.~L. Forman}, {\em Accelerating inference for diffusions
+  observed with measurement error and large sample sizes using approximate
+  {Bayesian} computation}, Journal of Statistical Computation and Simulation,
+  86 (2016), pp.~195--213, \url{https://doi.org/10.1080/00949655.2014.1002101}.
+
+\bibitem{Prangle2016}
+{\sc D.~Prangle}, {\em Lazy {ABC}}, Statistics and Computing, 26 (2016),
+  pp.~171--185, \url{https://doi.org/10.1007/s11222-014-9544-3}.
+
+\bibitem{Prangle2017}
+{\sc D.~Prangle}, {\em Adapting the {ABC} distance function}, Bayesian
+  Analysis, 12 (2017), pp.~289--309, \url{https://doi.org/10.1214/16-BA1002}.
+
+\bibitem{Prescott2020}
+{\sc T.~P. Prescott and R.~E. Baker}, {\em Multifidelity approximate {Bayesian}
+  computation}, SIAM/ASA Journal on Uncertainty Quantification, 8 (2020),
+  pp.~114--138, \url{https://doi.org/10.1137/18M1229742}.
+
+\bibitem{Rabusseau2014}
+{\sc G.~Rabusseau and F.~Denis}, {\em Learning negative mixture models by
+  tensor decompositions},  (2014),
+  \url{https://arxiv.org/abs/http://arxiv.org/abs/1403.4224v2}.
+\newblock \url{http://arxiv.org/abs/1403.4224}.
+
+\bibitem{Schnoerr2017}
+{\sc D.~Schnoerr, G.~Sanguinetti, and R.~Grima}, {\em Approximation and
+  inference methods for stochastic biochemical kinetics{\textemdash}a tutorial
+  review}, Journal of Physics A: Mathematical and Theoretical, 50 (2017),
+  p.~093001, \url{https://doi.org/10.1088/1751-8121/aa54d9}.
+
+\bibitem{Seltman2018}
+{\sc H.~Seltman}, {\em Approximations for mean and variance of a ratio}.
+\newblock Online notes, 2018,
+  \url{http://www.stat.cmu.edu/~hseltman/files/ratio.pdf}.
+
+\bibitem{Sisson2018}
+{\sc S.~A. Sisson, Y.~Fan, and M.~A. Beaumont}, {\em Handbook of Approximate
+  {Bayesian} Computation}, Chapman \& Hall / CRC, 2018.
+
+\bibitem{Sisson2007}
+{\sc S.~A. Sisson, Y.~Fan, and M.~M. Tanaka}, {\em Sequential {Monte Carlo}
+  without likelihoods}, Proceedings of the National Academy of Sciences, 104
+  (2007), pp.~1760--1765, \url{https://doi.org/10.1073/pnas.0607208104}.
+
+\bibitem{Sunnaker2013}
+{\sc M.~Sunn{\aa}ker, A.~G. Busetto, E.~Numminen, J.~Corander, M.~Foll, and
+  C.~Dessimoz}, {\em Approximate {Bayesian} computation}, PLOS Computational
+  Biology, 9 (2013), pp.~1--10,
+  \url{https://doi.org/10.1371/journal.pcbi.1002803}.
+
+\bibitem{Toni2009}
+{\sc T.~Toni, D.~Welch, N.~Strelkowa, A.~Ipsen, and M.~P.~H. Stumpf}, {\em
+  Approximate {Bayesian} computation scheme for parameter inference and model
+  selection in dynamical systems}, Journal of the Royal Society Interface, 6
+  (2009), pp.~187--202, \url{https://doi.org/10.1098/rsif.2008.0172}.
+
+\end{thebibliography}

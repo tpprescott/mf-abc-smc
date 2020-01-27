@@ -1,0 +1,41 @@
+\PassOptionsToPackage{demo}{graphicx}
+\usepackage{amssymb, amsmath}
+\usepackage{algorithmic}
+\usepackage{cleveref}
+\usepackage[demo]{graphicx}
+\usepackage[caption=false]{subfig}
+
+
+% Prevent itemized lists from running into the left margin inside theorems and proofs
+\usepackage{enumitem}
+\setlist[enumerate]{leftmargin=.5in}
+\setlist[itemize]{leftmargin=.5in}
+
+% Used for creating new theorem and remark environments
+\newsiamremark{note}{Note}
+\crefname{note}{Note}{Notes}
+
+% Sets running headers as well as PDF title and authors
+\headers{Multifidelity ABC-SMC}{T.P. Prescott and R.E. Baker}
+
+% Title. If the supplement option is on, then "Supplementary Material"
+% is automatically inserted before the title.
+\title{Multifidelity Approximate Bayesian Computation with Sequential Monte Carlo Parameter Sampling\thanks{
+Submitted to the editors January 2020 \funding{
+This work is supported by BBSRC through grant BB/R000816/1.}}}
+
+\author{
+Thomas P. Prescott\thanks{Mathematical Institute, University of Oxford, Woodstock Road, Oxford, OX2 6GG, UK (\email{prescott@maths.ox.ac.uk, ruth.baker@maths.ox.ac.uk})\funding{REB is supported by.}}
+\and Ruth E. Baker\footnotemark[2]
+}
+
+
+
+\newcommand{\obs}[1]{#1_{\mathrm{obs}}}
+\newcommand{\tp}[1]{#1_{\mathrm{tp}}}
+\newcommand{\fp}[1]{#1_{\mathrm{fp}}}
+\newcommand{\fn}[1]{#1_{\mathrm{fn}}}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\graphicspath{{figs/out/png/}}
