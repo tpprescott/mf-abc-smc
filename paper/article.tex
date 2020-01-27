@@ -198,7 +198,7 @@ However, for $p_\epsilon(\theta~|~\obs y)$ to be a good approximation to the lik
 This means that, in regions of low likelihood, many simulations will produce $y \notin \Omega_\epsilon$ and so will receive zero weight.
 This often leads to poor performance: a large computational burden that produces many rejections.
 In this setting, \emph{importance sampling} is one adaptation of \Cref{ABC:Rejection} commonly used to improve its performance.
-It works by carrying out fewer simulations in regions of low likelihood~\cite{Owen2013,Sisson2018} by proposing parameters according to an importance distribution defined on $\Theta$.
+It works by carrying out fewer simulations in regions of low likelihood~\cite{Sisson2018,Owen2013} by proposing parameters according to an importance distribution defined on $\Theta$.
 
 Suppose that, in addition to the prior density, $\pi(\theta)$, there is a non-negative function $q(\theta) \geq 0$ defined on $\Theta$.
 If $q(\theta)>0$ for all $\theta$ in the support of $\pi$, then the probability distribution $\hat q = q(\cdot)/Z_q$, with the normalisation constant $Z_q = \int_\Theta q(\theta) ~\mathrm d\theta$, is termed an importance distribution.
@@ -249,7 +249,7 @@ Suppose that there exists a positive constant $\lambda$ such that
 where $f_\epsilon$ is the ABC approximation to the likelihood and where $\pi(\cdot)$ is the prior.
 Then, for arbitrary functions $F$ on $\Theta$, the mean squared error (MSE),
 \[
-\mathbb E\left( \left( \bar F - \mathbb E_{p_\epsilon} \left(F(\theta) \right) \right)^2 \right) \rightarrow 0,
+\mathbb E\left( \left( \bar F - \mathbb E_{p_\epsilon} \left(F(\theta) \right) \right)^2 \right),
 \]
 between $\mathbb E_{p_\epsilon}(F(\theta))$ and $\bar F$, defined in \Cref{eq:estimate}, decays as $N \rightarrow \infty$ on the order of $1/N$.
 Thus, the Monte Carlo sample is from the ABC posterior $p_\epsilon(\theta~|~\obs y)$.
@@ -270,7 +270,7 @@ Using the delta method~\cite{Seltman2018}, we can therefore write both the bias 
 \begin{subequations}
 \label{eq:estimate:MSE}
 \begin{align}
-\mathbb E \left( \bar F \right) - \mathbb E_{p_\epsilon}(F(\theta))
+\mathrm{Bias}(\bar F) = \mathbb E \left( \bar F \right) - \mathbb E_{p_\epsilon}(F(\theta))
 &= 
 \frac{1}{N} \frac{\mathbb E \left( w^2 \left[ \mathbb E_{p_\epsilon}(F(\theta)) - F \left(\theta\right) \right] \right)}{\mathbb E(w)^2} + O(1/N^2),
 \label{eq:estimate:bias}
@@ -281,7 +281,7 @@ Using the delta method~\cite{Seltman2018}, we can therefore write both the bias 
 \label{eq:estimate:variance}
 \end{align}
 \end{subequations}
-Using the standard decomposition of the MSE into the sum of the variance and squared bias, it follows that, to leading order, the MSE is dominated by the variance term in \Cref{eq:estimate:variance} as $N \rightarrow \infty$.
+Using the standard decomposition of the MSE into the sum of the variance and squared bias, it follows that, to leading order, the MSE is dominated by the variance term given in \Cref{eq:estimate:variance} as $N \rightarrow \infty$.
 Therefore the estimate in \Cref{eq:estimate} is consistent in the limit of large sample size, with convergence in MSE on the order of $1/N$. 
 \end{proof}
 
@@ -349,15 +349,15 @@ The following procedure generates $\theta^\star \sim \hat q_{t+1}(\cdot)$:
 \item Perturb the parameter according to a perturbation kernel $K_t$, producing $\theta^{\star} \sim K_{t}(\cdot~|~\theta^{\star\star})$.
 \item If $\pi(\theta)>0$, then return $\theta^{\star}$; else return to 1.
 \end{enumerate}
-Note that the ABC-SMC algorithm requires the specification of a threshold sequence $\epsilon_t$, the stopping conditions $S_t$, and the perturbation kernels $K_t(\cdot~|~\theta)$ for $t=1,\dots,T$.
+Note that the ABC-SMC algorithm requires the specification of a threshold sequence $\epsilon_t$, the stopping conditions $S_t$, and the perturbation kernels $K_t(\cdot~|~\theta)$ for $t=1,\dots,T$~\cite{Sisson2018}.
 We will not re-examine these aspects of ABC-SMC in detail in this paper, and will implement ABC-SMC using established techniques to select $\epsilon_t$, $S_t$ and $K_t$~\cite{Toni2009,DelMoral2012,Beaumont2009,Filippi2013}.
 
 \subsection{Multifidelity ABC}
 \label{s:MFABC}
 Importance sampling and SMC approaches can improve the performance of ABC by exploring parameter space more efficiently, so that simulation time is not wasted in regions of low likelihood.
 An orthogonal approach to improving ABC is to attempt to avoid computationally expensive simulations, where possible, by relying on the \emph{multifidelity} framework~\cite{Prescott2020}.
-We term the model of interest, $f(\cdot~|~\theta)$, which maps parameter space $\Theta$ to an output space $\mathcal Y$, as the high-fidelity model, .
-We now assume that, in addition, there is a low-fidelity (i.e. approximate) model, $\tilde f(\cdot~|~\theta)$, of the same physical system with the same parameter space, $\Theta$.
+We term the model of interest, $f(\cdot~|~\theta)$, which maps parameter space $\Theta$ to an output space $\mathcal Y$, as the high-fidelity model.
+We now assume that, in addition, there is a low-fidelity (i.e. approximate) model, $\tilde f(\cdot~|~\theta)$, of the same physical system with the same parameter space $\Theta$.
 The simulations of this model are denoted $\tilde y \sim \tilde f(\cdot~|~\theta)$, taking values in the output space $\tilde{\mathcal Y}$, which may differ from $\mathcal Y$.
 Importantly, we assume that the low-fidelity model is computationally cheaper, in the sense that simulations $\tilde y \sim \tilde f(\cdot~|~\theta)$ of the low-fidelity model incur less computational burden than simulations $y \sim f(\cdot~|~\theta)$ of the high-fidelity model.
 
@@ -381,14 +381,14 @@ The key condition for a valid coupled high-fidelity model is that
  \int_{\tilde{\mathcal{Y}}} f(y ~|~ \tilde y, \theta) \tilde f(\tilde y~|~\theta) ~\mathrm d\tilde y = f(y ~|~ \theta).
 \end{equation}
 The benefit of this approach is that, with a judicious choice of coupling method, a simulation $y \sim f(\cdot~|~\tilde y, \theta)$ from the coupled high-fidelity model is more closely correlated to $\tilde y$ than an independent simulation $y \sim f(\cdot~|~\theta)$ from the original high-fidelity model.
-Furthermore, simulations of $y \sim f(\cdot~|~\tilde y, \theta)$ may be less computationally burdensome than simulating $y \sim f(\cdot~|~\theta)$.
+Furthermore, simulations of $y \sim f(\cdot~|~\tilde y, \theta)$ may be less computationally burdensome than simulations of $y \sim f(\cdot~|~\theta)$.
 
 As an example, suppose the high-fidelity model is a Markovian stochastic dynamical system on the time horizon $t \in [0,T]$, and that the low-fidelity model is the same system on $t \in [0,\tau]$ for $\tau<T$~\cite{Prangle2016}.
 The low-fidelity and high-fidelity models can clearly be simulated independently on $[0,\tau]$ and $[0,T]$, respectively, and the low-fidelity simulation will, on average, be less computationally expensive than the high-fidelity simulation.
 However, suppose we have generated a simulation, $\tilde y(t)$, of the low-fidelity model, which is a trajectory over $t \in [0,\tau]$.
 In this case, a natural coupling is to deterministically assign $y(t)$ to have the same trajectory as $\tilde y(t)$ over $t \in [0, \tau]$, and then complete the simulation for $y(t)$ over $t \in [\tau, T]$ from the initial condition $\tilde y(\tau)$.
 The coupled high-fidelity simulation, $y$, generated conditionally on $\tilde y$, incurs further simulation cost beyond that of $\tilde y$, but this is less than that incurred by generating an independent (i.e. uncoupled) high-fidelity simulation.
-Many other possible couplings exist for different multifidelity models, often involving shared random noise processes, and methods for coupling are currently an area of active research~\cite{Croci2018,Lester2018,Prescott2020}.
+Many other possible couplings exist for different multifidelity models, often involving shared random noise processes, and methods for coupling are currently an area of active research~\cite{Prescott2020,Croci2018,Lester2018}.
 
 In order to apply the multifidelity framework to ABC parameter inference, recall that each weight, $w_n$, generated by \Cref{ABC:Rejection,ABC:Importance} requires a simulation $y_n \sim f(\cdot~|~\theta_n)$ from the high-fidelity model.
 The multifidelity approach defines another weighting function for each Monte Carlo weight $w_n = w(\tilde y_n, u_n, y_n)$, such that
@@ -441,7 +441,7 @@ The weighted Monte Carlo sample $\{ \theta_n, w_n\}$ returned by \Cref{MFABC:Rej
 \end{proposition}
 \begin{proof}
 By \Cref{lemma:MC}, we need to show that \Cref{eq:ABCCondition} holds.
-Here, $\hat q = \pi$, and performing the triple integral in the order $u$, $\tilde y$, then $y$ gives the equality
+Here $\hat q = \pi$ and performing the triple integral in the order $u$, $\tilde y$, then $y$ gives the equality
 \begin{align*}
 \mathbb E(w(\tilde y, u, y)~|~\theta) 
 &= \iiint w(\tilde y, u, y) f(y~|~\tilde y, \theta) \tilde f(\tilde y~|~\theta) ~\mathrm du ~\mathrm d\tilde y ~\mathrm dy 
@@ -455,9 +455,9 @@ Here, $\hat q = \pi$, and performing the triple integral in the order $u$, $\til
 Hence \Cref{eq:ABCCondition} holds for $w_n = w(\tilde y_n, u_n, y_n)$ given by \Cref{eq:w_mf}, and the result follows.
 \end{proof}
 
-Note that smaller values of continuation probability, $\alpha$, lead to greater savings in computational burden, since high-fidelity simulations, $y_n$, are generated less often.
-However, it is possible to show that this comes at the cost of an increase in the MSE of the estimator as given in \Cref{eq:estimate}, $\bar F \approx \mathbb E_{p_\epsilon}(F(\cdot))$, of an arbitrary function $F(\cdot)$ on $\Theta$.
-We now describe the trade-off between reducing computational burden and increasing MSE in more detail.
+Note that smaller values of the continuation probability, $\alpha$, lead to greater savings in computational burden, since high-fidelity simulations, $y_n$, are generated less often.
+However, it is possible to show that this comes at the cost of an increase in the MSE of the estimator, $\bar F \approx \mathbb E_{p_\epsilon}(F(\cdot))$, (as given in \Cref{eq:estimate}) of an arbitrary function $F(\cdot)$ on $\Theta$.
+We now describe in more detail the trade-off between reducing the computational burden and increasing the MSE.
 
 \subsection{ABC Performance}
 \label{s:Performance}
@@ -480,7 +480,7 @@ For small values of $\epsilon$, the constant $Z = \mathbb P(y \in \Omega_\epsilo
 Hence, the computational burden, if measured by the number of required simulations to achieve a target MSE, may be unreasonably large when $\epsilon$ is small.
 % In this example, $Z$ can be thought of as a measure of the efficiency of the algorithm, since it controls how much computation is required to produce a sample to a given MSE.
 
-We can express computational burden more explicitly in terms of simulation costs.
+We can express the computational burden more explicitly in terms of simulation costs.
 For concreteness, we define $T_{\mathrm{total}} = \sum_n T_n$ to be the sum of the elapsed times, $T_n = T(w_n)$, taken to calculate each $w_n$ given $\theta_n$.
 Then $\mathbb E(T_{\mathrm{total}}) = N \mathbb E(T)$, where the random variable $T$ denotes the time taken to generate a single weight $w$.
 Therefore,
@@ -489,7 +489,7 @@ Therefore,
 \approx
 \frac{\mathrm{Var}_{p_\epsilon} (F(\theta)) / \mathrm{MSE} }{Z / \mathbb E(T)},
 \]
-gives an estimate of the expected simulation time required to construct a Monte Carlo estimate, $\bar F \approx \mathbb E_{p_\epsilon}(F(\theta))$ using \Cref{ABC:Rejection} (ABC-RS) with a target MSE value.
+gives an estimate of the expected simulation time required to construct a Monte Carlo estimate, $\bar F \approx \mathbb E_{p_\epsilon}(F(\theta))$, using \Cref{ABC:Rejection} (ABC-RS) with a target MSE value.
 In this formulation of computational cost, we will interpret the ratio $Z/\mathbb E(T)$ as the theoretical efficiency of \Cref{ABC:Rejection}, according to \Cref{def:efficiency:th} below.
 
 This analysis motivates the following definition of the theoretical efficiency of general ABC algorithms that satisfy the conditions of \Cref{lemma:MC}.
@@ -618,13 +618,13 @@ In principle, we can replace the call of \Cref{ABC:Importance} (ABC-IS) in step 
 However, the key difficulty with implementing multifidelity ABC-SMC lies in the definition of the importance distribution, $\hat q_{t+1}$, for generation $t+1$, given the Monte Carlo sample, $\{ \theta_n^{(t)}, w_n^{(t)} \}_{n=1}^{N_t}$, returned in generation $t$. 
 
 Since the weights, $w_n$, are now calculated using the multifidelity weight in \Cref{eq:qw_mf}, there is a positive probability that there exist $w_n < 0$.
-These are generated whenever $\tilde y_n \in \Omega_\epsilon$, but where we also simulate the high-fidelity model and produce $y_n \notin \Omega_\epsilon$.
+Negative values of $w_n$ are generated whenever $\tilde y_n \in \Omega_\epsilon$, but where we also simulate the high-fidelity model and produce $y_n \notin \Omega_\epsilon$.
 This leads to two problems with the existing definition of the importance distribution in \Cref{eq:importance}.
 First, there is no longer a guarantee that $q_{t+1}(\theta) > 0$ whenever $\pi(\theta)>0$, even when the perturbation kernels, $K_t$, have infinite support.
 Secondly, even if the $K_t$ could be chosen to guarantee $q_{t+1}(\theta)>0$, the method for sampling from the importance distribution, $\hat q_{t+1} \propto q_{t+1}$, is no longer valid: 
-we cannot choose $\theta^{\star \star}$ from the set of $\{ \theta_n^{(t)} \}_{n=1}^{N_t}$ with probabilities proportional to $\{ w_n^{(t)} \}_{n=1}^{N_t}$, because any $w_n^{(t)} < 0$ cannot be a probability.
+we cannot choose $\theta^{\star \star}$ from the set of $\{ \theta_n^{(t)} \}_{n=1}^{N_t}$ with probabilities proportional to $\{ w_n^{(t)} \}_{n=1}^{N_t}$, because any $w_n^{(t)} < 0$ cannot define a probability.
 
-To overcome the first issue, we define a new importance distribution based on a parameter, $0<\delta<1$, that uses the technique of defensive importance sampling~\cite{Owen2013} and enforces positivity.
+To overcome the first issue, we define a new importance distribution based on a parameter $0<\delta<1$ that uses the technique of defensive importance sampling~\cite{Owen2013} and enforces positivity.
 Dropping the index $t$ for notational simplicity, we define the two functions
 \begin{subequations}
 \label{eq:DefensiveImportance}
@@ -667,7 +667,7 @@ Then $x^\star \sim \hat h^\phi(\cdot)$ where $\hat h^\phi(\cdot)$ is the normali
 To illustrate this sampling procedure, we let $f$ and $g$, respectively, be the probability density functions of $\mathrm{Beta}(1,2)$ and $\mathrm{Beta}(2,2)$ random variables.
 Choosing $\mu = 3$, \Cref{fig:negative_mixture} shows that $h(x)<0$ on $x>0.5$.
 We applied the sampling procedure in \Cref{negmix} for each of $\phi_0(x) \equiv 0$ and $\phi_1(x) = 0.3f(x)$ to produce $20,000$ sample values from $\hat h_{\phi_0}$ and $\hat h_{\phi_1}$, and plotted their histograms.
-The acceptance probabilities in step (3) of \Cref{negmix} were $\max(0, 1-\alpha)$ and $\max(0.1, 1 - \alpha)$, respectively.
+The acceptance probabilities in step (3) of \Cref{negmix} were $\max(0, 1-\beta)$ and $\max(0.1, 1 - \beta)$, respectively.
 The results in \Cref{fig:negative_mixture} demonstrate that we can sample from a negative mixture and simultaneously specify a positive lower bound on the resulting density.
 
 \begin{figure}
@@ -782,7 +782,7 @@ For simplicity, we will constrain the search for optimal $\alpha(\tilde y, \thet
 \end{equation}
 for the constants $\eta_1, \eta_2 \in (0,1]$.
 Here, $\eta_1$ is the probability of generating $y$ after a `positive' low-fidelity simulation (where $\tilde y \in \Omega_\epsilon$) and $\eta_2$ is the probability of generating $y$ after a `negative' low-fidelity simulation (where $\tilde y \notin \Omega_\epsilon$).
-The goal of this section is to specify the values of the two parameters $\eta_1$, $\eta_2$, that will give the largest efficiency, $\psi$.
+The goal of this section is to specify the values of the two parameters, $\eta_1$ and $\eta_2$, that will give the largest theoretical efficiency, $\psi$.
 In previous work, we have derived the optimal values of $\eta_1$ and $\eta_2$ to use in \Cref{MFABC:Rejection} (MF-ABC-RS)~\cite{Prescott2020}.
 We can now extend this analysis by finding optimal values of $\eta_1$ and $\eta_2$ to use in \Cref{MFABC:Importance} (MF-ABC-IS).
 
@@ -876,7 +876,7 @@ Second, for small values of $\fp W$ and $\fn W$ we require $q$ to be larger than
 We can intepret this as a requirement that the region of parameter space where simulations of the low-fidelity and high-fidelity model are less often in agreement (in terms of membership of $\Omega_\epsilon$) should be explored more thoroughly by $\hat q$ than by $\pi$.
 
 The consequence of \Cref{lemma:phi} is that we should choose continuation probabilities $\eta_1,\eta_2>0$ to maximise the theoretical efficiency, $\psi$, by minimising $\phi$ in \Cref{eq:Phi}.
-It is clear from \Cref{eq:Phi} that the cost to the algorithm's efficiency of using $\eta_1$ or $\eta_2$ too small (i.e. too close to $0$) is much greater than using larger values (i.e. closer to $1$).
+It is clear from \Cref{eq:Phi} that the cost to the algorithm's efficiency of using $\eta_1$ or $\eta_2$ too small (i.e. too close to zero) is much greater than using larger values (i.e. closer to $1$).
 Therefore, we conservatively optimise $\phi$ in the region $(\eta_1,\eta_2) \in \mathcal H = [\rho_1,1] \times [\rho_2, 1]$, defined by user-specified lower bounds $\rho_1, \rho_2 > 0$ on the continuation probabilities.
 We proceed by first optimising $\phi$ on the entire positive quadrant in \Cref{etastar:unbounded}, and also on the boundary $\partial \mathcal H$ of $\mathcal H$ in \Cref{etastar:boundary}. 
 These lemmas combine in \Cref{etastar}, where we derive the continuation probabilities $(\eta_1^\star, \eta_2^\star) \in \mathcal H$ that minimise $\phi$ and hence maximise $\psi$.
@@ -936,7 +936,7 @@ In \Cref{s:eta:MC} we consider how to exploit the SMC approach to construct near
 
 Recall that we are aiming to use this method in the context of sequential Monte Carlo.
 In the sequential importance sampling approach discussed in \Cref{s:SMC,s:MF-ABC-SIS}, we use a Monte Carlo sample from generation $t$ to construct the importance distribution, $\hat q_{t+1}$ or $\hat r_{t+1}$, for use in generation $t+1$.
-The proposed approach to constructing continuation probabilities is the same: we will use the Monte Carlo sample built in generation $t$ to also produce continuation probabilities, $\eta_1$ and $\eta_2$, with which we define the continuation probability $\alpha_{t+1}$ to use at generation $t+1$.
+The proposed approach to constructing continuation probabilities is the same: we will use the Monte Carlo sample built in generation $t$ to also produce the values of $\eta_1$ and $\eta_2$ defining the continuation probability $\alpha_{t+1}$ to use at generation $t+1$.
 The following definition specifies how to calculate approximations of the quantities in \Cref{eq:PhiComponents} using an existing Monte Carlo sample.
 These approximations can then be substituted into \Cref{eq:etastar:unbounded,eq:etastar:boundary}.
 Hence, we can estimate the optimal continuation probabilities as given by \Cref{etastar}.
@@ -1080,7 +1080,7 @@ for positive integers $n$ and the imaginary unit $i$.
 A system of coupled ODEs can be generated for the set of $Z_n$.
 Under the assumption that $Z_n(t) = Z_1(t)^n$, known as the Ott-Antonsen ansatz~\cite{Hannay2018,Ott2008}, the system can be reduced to a single ODE for $Z_1$, which is known as the Kuramoto parameter.
 This complex-valued trajectory is usually represented by two real trajectories, corresponding to its magnitude $R(t) = \| Z_1(t)) \|$ and phase $\Phi(t) = \arg(Z_1(t))$.
-The approximation of the $M$-dimensional ODE system in \Cref{eq:Kuramoto_hi} under the OA ansatz is thus given by the two-dimensional ODE system,
+The approximation of the $M$-dimensional ODE system in \Cref{eq:Kuramoto_hi} under the OA ansatz is thus given by the two-dimensional ODE system
 \begin{subequations}
 \label{eq:Kuramoto_lo}
 \begin{align}
@@ -1090,7 +1090,7 @@ The approximation of the $M$-dimensional ODE system in \Cref{eq:Kuramoto_hi} und
 \end{subequations}
 with initial conditions $(\tilde R(0), \tilde \Phi(0)) = (1, 0)$, which directly simulates the low-dimensional representation of the $M$-dimensional state vector.
 
-The goal of this example is to infer the parameters $(K, \omega_0, \gamma)$, based on synthetic data, generated by simulating a system of $M=256$ oscillators with random angular velocities $\omega_i$ over $t \in (0, 30]$.
+The goal of this example is to infer the parameters $(K, \omega_0, \gamma)$ based on synthetic data, generated by simulating a system of $M=256$ oscillators with random angular velocities $\omega_i$ over $t \in (0, 30]$.
 We record the trajectories $\obs R(t)$ and $\obs \Phi(t)$ of the magnitude and phase of the Kuramoto parameter.
 The parameter values used to generate these data are $(K=2,~\omega_0 = \pi/3,~\gamma=0.1)$.
 The likelihood of the observed data under the model in \Cref{eq:Kuramoto_hi} with stochastic parameters $\omega_i \sim \mathrm{Cauchy}(\omega_0, \gamma)$ is unavailable, and we must therefore resort to ABC inference, requiring repeated simulation.
@@ -1158,7 +1158,7 @@ Percentages refer to the increase in efficiency over the base efficiency of ABC-
 \center
 \begin{tabular}{l|lll}
  & ESS & Sim. time (min) & Efficiency (ESS/min)
-\\ \hline \Cref{ABC:Rejection} (ABC-RS) & 148 & 43.6 & 3.39
+\\ \hline \Cref{ABC:Rejection} (ABC-RS) & 148.0 & 43.6 & 3.39
 \\ \Cref{ABC:SMC} (ABC-SMC) & 255.1 & 48.8 & 5.23 ($\uparrow 54\%$)
 \\ \Cref{MFABC:Rejection} (MF-ABC-RS) & 126.4 & 22.9 & 5.52 ($\uparrow 63\%$)
 \end{tabular}
@@ -1175,7 +1175,7 @@ This result illustrates the orthogonal effects of the SMC and multifidelity ABC 
 \label{s:Results}
 
 In order to demonstrate the increase in efficiency of introducing multifidelity approaches to ABC-SMC, we produced $100$ samples from $p_{0.1}((K, \omega_0, \gamma)~|~\obs y)$, consisting of $50$ replicates from each of \Cref{ABC:SMC} (ABC-SMC) and \Cref{MFABC:SMC} (MF-ABC-SMC).
-Common to both algorithms is the number of generations, $T=8$, which correspond to the nested sequence of ABC neighbourhoods $\Omega_{\epsilon_t}$ with the sequence of thresholds 2.0, 1.5, 1.0, 0.8, 0.6, 0.4, 0.2 and 0.1.
+Common to both algorithms is the number of generations, $T=8$, which corresponds to the nested sequence of ABC neighbourhoods $\Omega_{\epsilon_t}$ with the sequence of thresholds 2.0, 1.5, 1.0, 0.8, 0.6, 0.4, 0.2 and 0.1.
 Each generation has a stopping condition of $\mathrm{ESS} \geq 400$, evaluated after every $100$ parameter proposals (to allow for parallelisation).
 This condition reflects a specification that we need each generation's sample to be, in some sense, `good enough' to produce a reliable importance distribution that can be used in the next generation.
 Finally, we specified the perturbation kernels $K_t(\cdot~|~(K, \omega_0, \gamma)^{(t)}_n)$ at each generation to be Gaussians centred on the parameter value $(K, \omega_0, \gamma)^{(t)}_n$.
@@ -1199,15 +1199,16 @@ These choices aim to limit the variability of $|w_n|$ to prevent the collapse of
 \label{s:Results:Efficiency}
 
 \Cref{ABC:SMC,MFABC:SMC} were implemented and run using Julia 1.0.2 on a 36 core CPU (2 $\times$ 18 core with hyperthreading), 2.3/3.7 GHz, 768 GB RAM.
-On average across $50$ replicates, \Cref{MFABC:SMC} (MF-ABC-SMC) required $0.66~\mathrm{h}$ of total simulation time.
-This is $42\%$ of the average total simulation time of $1.59~\mathrm{h}$ across $50$ independent replicates of \Cref{ABC:SMC} (ABC-SMC).
+On average across $50$ replicates, the average total simulation time of \Cref{ABC:SMC} (ABC-SMC) was $1.59~\mathrm{h}$. 
+In contrast, \Cref{MFABC:SMC} (MF-ABC-SMC) required $0.66~\mathrm{h}$ of total simulation time, which is a reduction of $58\%$.
 The observed standard deviation of the total simulation time is $140~\mathrm{s}$ for ABC-SMC, as opposed to $122~\mathrm{s}$ for MF-ABC-SMC.
-Thus, while the mean simulation time is significantly less for  \Cref{MFABC:SMC} (MF-ABC-SMC), the coefficient of variation in the total simulation time is larger for these samples.
+Thus, the coefficient of variation for simulation time is $.024$ for ABC-SMC, against $0.051$ for MF-ABC-SMC.
+Therefore, while the mean simulation time is significantly less for \Cref{MFABC:SMC} (MF-ABC-SMC), the coefficient of variation in the total simulation time is larger.
 
 \Cref{fig:efficiencies_smc} shows the distributions of the observed efficiencies for the $50$ replicates of each of \Cref{ABC:SMC,MFABC:SMC}.
 Note that we are defining the observed efficiency as the ratio of the ESS of $\{(K, \omega_0, \gamma)_n^{(8)},  w_n^{(8)} \}$ to the total simulation time (summed across all eight generations).
 Clearly, \Cref{MFABC:SMC} (MF-ABC-SMC) produces samples much more efficiently than \Cref{ABC:SMC} (ABC-SMC).
-Since the final generation has a stopping condition where the effective sample size reaches $400$ in both algorithms, the difference in the observed efficiency, $ESS/T_{\mathrm{total}}$, results from the observed differences in simulation time between the two algorithms.
+Since the final generation has a stopping condition where the effective sample size reaches $400$ in both algorithms, the difference in the observed efficiency, $\mathrm{ESS}/T_{\mathrm{total}}$, results from the observed differences in simulation time between the two algorithms.
 
 
 \begin{figure}
@@ -1348,7 +1349,7 @@ In this work we have examined how to integrate two approaches to overcoming the 
 the SMC technique for producing parameter proposals,
 and the multifidelity technique for using low-fidelity models to reduce overall simulation time.
 By combining these approaches, we have produced the MF-ABC-SMC algorithm in \Cref{MFABC:SMC}.
-The results in \Cref{s:Example} demonstrate that the efficiency of sampling from the ABC posterior (measured as the ratio of the ESS to simulation time) can be significantly improved by using \Cref{MFABC:SMC} in place of \Cref{ABC:SMC} (ABC-SMC).
+The results in \Cref{s:Example} demonstrate that the efficiency of sampling from the ABC posterior (measured as the ratio of the ESS to simulation time) can be significantly improved by using \Cref{MFABC:SMC} (MF-ABC-SMC) in place of \Cref{ABC:SMC} (ABC-SMC).
 The increase in efficiency is most significant during the early SMC generations, where the acceptance rate is relatively large.
 Furthermore, for a fixed computational budget, the bias incurred by using an ABC approximation to the posterior is greatly reduced by modifying \Cref{MFABC:SMC} (MF-ABC-SMC) to implement an adaptive choice of thresholds.
 
