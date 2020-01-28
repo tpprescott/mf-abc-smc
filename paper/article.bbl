@@ -3,8 +3,7 @@
 \bibitem{Alsing2018}
 {\sc J.~Alsing, B.~D. Wandelt, and S.~M. Feeney}, {\em Optimal proposals for
   approximate {Bayesian} computation},  (2018),
-  \url{https://arxiv.org/abs/http://arxiv.org/abs/1808.06040v1}.
-\newblock \url{http://arxiv.org/abs/1808.06040}.
+  \url{https://arxiv.org/abs/1808.06040v1}.
 
 \bibitem{Beaumont2010}
 {\sc M.~A. Beaumont}, {\em Approximate {Bayesian} computation in evolution and
@@ -24,9 +23,7 @@
 \bibitem{Croci2018}
 {\sc M.~Croci, M.~B. Giles, M.~E. Rognes, and P.~E. Farrell}, {\em Efficient
   white noise sampling and coupling for multilevel {Monte Carlo} with
-  non-nested meshes},  (2018),
-  \url{https://arxiv.org/abs/http://arxiv.org/abs/1803.04857v2}.
-\newblock \url{http://arxiv.org/abs/1803.04857v2}.
+  non-nested meshes},  (2018), \url{https://arxiv.org/abs/1803.04857v2}.
 
 \bibitem{DelMoral2006}
 {\sc P.~{Del Moral}, A.~Doucet, and A.~Jasra}, {\em Sequential {Monte Carlo}
@@ -42,14 +39,11 @@
 
 \bibitem{Elvira2018}
 {\sc V.~Elvira, L.~Martino, and C.~P. Robert}, {\em Rethinking the effective
-  sample size},  (2018),
-  \url{https://arxiv.org/abs/http://arxiv.org/abs/1809.04129v1}.
-\newblock \url{http://arxiv.org/abs/1809.04129}.
+  sample size},  (2018), \url{https://arxiv.org/abs/1809.04129v1}.
 
 \bibitem{Everitt2017}
 {\sc R.~G. Everitt and P.~A. Rowi\'{n}ska}, {\em Delayed acceptance {ABC-SMC}},
-   (2017), \url{https://arxiv.org/abs/http://arxiv.org/abs/1708.02230v1}.
-\newblock \url{https://arxiv.org/abs/1708.02230}.
+   (2017), \url{https://arxiv.org/abs/1708.02230v1}.
 
 \bibitem{Fearnhead2012}
 {\sc P.~Fearnhead and D.~Prangle}, {\em Constructing summary statistics for
@@ -77,7 +71,7 @@
 \bibitem{Harrison2017a}
 {\sc J.~U. Harrison and R.~E. Baker}, {\em An automatic adaptive method to
   combine summary statistics in approximate {Bayesian} computation}.
-\newblock arXiv 1703.02341v1, 2017, \url{https://arxiv.org/abs/1703.02341v1}.
+\newblock 2017, \url{https://arxiv.org/abs/1703.02341v1}.
 
 \bibitem{Hines2015}
 {\sc K.~E. Hines}, {\em A primer on {Bayesian} inference for biophysical
@@ -95,7 +89,6 @@
   biochemical reaction kinetics using multi-level {Monte Carlo} approaches},
   Journal of Computational Physics, 375 (2018), pp.~1401--1423,
   \url{https://doi.org/10.1016/j.jcp.2018.06.045}.
-\newblock arXiv 1707.09284.
 
 \bibitem{Ott2008}
 {\sc E.~Ott and T.~M. Antonsen}, {\em Low dimensional behavior of large systems
@@ -138,9 +131,7 @@
 
 \bibitem{Rabusseau2014}
 {\sc G.~Rabusseau and F.~Denis}, {\em Learning negative mixture models by
-  tensor decompositions},  (2014),
-  \url{https://arxiv.org/abs/http://arxiv.org/abs/1403.4224v2}.
-\newblock \url{http://arxiv.org/abs/1403.4224}.
+  tensor decompositions},  (2014), \url{https://arxiv.org/abs/1403.4224v2}.
 
 \bibitem{Schnoerr2017}
 {\sc D.~Schnoerr, G.~Sanguinetti, and R.~Grima}, {\em Approximation and
