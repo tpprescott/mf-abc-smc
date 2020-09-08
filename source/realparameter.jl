@@ -27,6 +27,10 @@ end
 function sqr(x::RealParameter{S,N}) where {S} where {N}
     return RealParameter{S,N}(sqr.(x.k))
 end
+function Base.zero(::Type{T}) where T<:RealParameter{S,N} where S where N
+    return T(zero(SVector{N, Float64}))
+end
+Base.zero(x::RealParameter{S,N}) where S where N = zero(RealParameter{S,N})
 
 ##### Samplers of R^n
 
@@ -79,26 +83,30 @@ end
 # How to construct an importance distribution from a weighted sample
 # This needs to be made more flexible: I'm hard-coding a standard approach
 # (common Gaussian perturbation kernel with common variance)
-# Common variance only uses the positive weights.
 function Importance(
     theta::Vector{RealParameter{S,N}},
     w::Vector{Float64},
-    def::Float64,
-    prior::ParameterSampler{RealParameter{S,N}},
+    prior::ParameterSampler{RealParameter{S,N}};
+    positivity_fun = abs,
 ) where {S} where {N}
 
-    nz = broadcast(isnz, w)
-    w_pos = broadcast(pospart, w[nz])
-    w_pos ./= sum(w_pos)
-    idx = Categorical(w_pos)
+    ww = copy(w)
+    broadcast!(positivity_fun, ww, ww)
+    p = ispos.(ww)
+    wt = Weights(ww[p])
 
-    thetastar = sum(w_pos.*theta[nz])
-    twice_sample_var = 2.0 * sum([w_i*sqr(t_i - thetastar) for (w_i, t_i) in zip(w_pos, theta[nz])])
+    i=1
+    arr = Array{Float64, 2}(undef, N, sum(p))
+    for (i, theta_i) in enumerate(theta[p])
+        view(arr, :, i) .= theta_i.k
+    end
+
+    twice_sample_var = 2.0 * var(arr, wt, 2)
 
     common_perturbation(t::RealParameter{S,N}) =
-        RealDist{S,N}(Normal.(t.k, sqrt.(twice_sample_var.k)))
+        RealDist{S,N}(Normal.(t.k, sqrt.(twice_sample_var)))
 
-    K = broadcast(common_perturbation, theta[nz])
+    K = broadcast(common_perturbation, theta[p])
 
-    return Importance{RealParameter{S,N}}(w[nz], idx, K, def, prior)
+    return Importance{RealParameter{S,N}}(wt, K, prior)
 end

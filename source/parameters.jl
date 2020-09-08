@@ -55,45 +55,24 @@ end
 #### IMPORTANCE SAMPLERS FOR ANY PARAMETER SPACE
 export Importance
 
-using Distributions
+using StatsBase
 # Importance distribution formed from weighted sample
 struct Importance{T} <: ParameterSampler{T}
-    w::Vector{Float64}
-    idx::Categorical
+    w::Weights
     K::Vector{<:ParameterSampler{T}}
-    def::Float64
     prior::ParameterSampler{T}
-    function Importance{T}(w, idx, K, def, prior) where {T}
-        if (def < zero(def)) || (def > one(def))
-            error("Incorrect defensive parameter (between 0 and 1 inclusive)")
-        end
-        return new{T}(w, idx, K, def, prior)
-    end
 end
+
 function (q::Importance{T})()::Tuple{T,Float64} where {T}
 
-    u = rand(2)
-    use_prior_prob = (q.def*sum(q.w))/(q.def*sum(q.w) + (1-q.def)*sum(pospart, q.w))
-    if u[1] < use_prior_prob
-        theta, prior_likelihood = generate(q.prior)
-    else
-        theta::T, _ = generate(q.K[rand(q.idx)])
-        prior_likelihood::Float64 = likelihood(theta, q.prior)
-        prior_likelihood == 0.0 && (return q())
-    end
-
-    lhvec = likelihood(theta, q.K)
-    lhvec .*= q.w ./ sum(q.w)
-
-    F = q.def*prior_likelihood + (1.0-q.def)*sum(pospart, lhvec)
-    G = (1.0-q.def)*sum(negpart, lhvec)
-    alpha::Float64 = max(1.0 - (G/F), q.def * prior_likelihood / F)
-
-    if u[2] < alpha
-        return theta, alpha * F
-    else
-        return q()
-    end
+    K_rand = sample(K, w)
+    theta::T, _ = generate(K_rand)
+    prior_likelihood::Float64 = likelihood(theta, q.prior)
+    prior_likelihood == 0.0 && (return q())
+    
+    lh = q(theta)
+    
+    return theta, lh
 end
 
 function importance_likelihood_component(
@@ -108,14 +87,12 @@ function (q::Importance{T})(theta::T)::Float64 where {T}
     prior_likelihood = likelihood(theta, q.prior)
     (prior_likelihood == 0.0) && (return 0.0)
 
-    importance_likelihood = 0.0
+    lh = 0.0
     for (w_i, K_i) in zip(q.w, q.K)
-        importance_likelihood += importance_likelihood_component(w_i, K_i, theta)
+        lh += ispos(w_i) ? w_i*likelihood(theta, K_i) : zero(lh)
     end
-    importance_likelihood /= sum(q.w)
+    lh /= q.w.sum
 
-    lh::Float64 = max(q.def * prior_likelihood,
-        q.def*prior_likelihood + (1-q.def)*importance_likelihood)
     return lh
 end
 

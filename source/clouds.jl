@@ -71,16 +71,17 @@ end
 
 
 # Importance distribution comes from array of particles in c
-function Importance(c::Cloud{S,T}; defensive::Float64 = 0.0)::Importance{T} where {T} where {S}
+# Assume default of taking absolute weight to make the importance distribution
+function Importance(c::Cloud{S,T})::Importance{T} where {T} where {S}
+    θ = [gettheta(p) for p in c]
     return Importance(
         gettheta.(c),
         getweight.(c),
-        defensive,
         c.abc.p,
     )
 end
 function likelihood(c::Cloud{S,T}, q::ParameterSampler{T}) where {S} where {T}
-    return broadcast(likelihood, gettheta.(c), [q])
+    return broadcast(likelihood, gettheta.(c), Ref(q))
 end
 
 Base.getindex(c::Cloud, i...) = getindex(c.particles, i...)
