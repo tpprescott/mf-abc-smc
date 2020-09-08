@@ -79,11 +79,6 @@ function Cloud(
     )
     C[1] = Cloud(mfabc, counter, stop_condition[1]; batch_size=batch_size)
     for k = 2:K
-        if count(isneg, getweight.(C[k-1])) == 0
-            d = 0.0
-        else
-            d = defensive
-        end
         q = Importance(C[k-1])
         e = epsilon_i(smc.epsilons, k)
         mfabc = MFABCProblem(
