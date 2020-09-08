@@ -9,7 +9,7 @@ Nclouds = 1
 ESSgen = 400.0
 
 smc = SMCProblem(prior, (y_lo, y_hi), (m_lo, m_hi), [2.0, 1.9])
-Cloud(smc, length, 100, defensive=0.01, eta_min=0.01)
+Cloud(smc, length, 100, eta_min=0.01)
 smc = SMCProblem(prior, (y_lo, y_hi), (m_lo, m_hi), sch)
 
 F(p::Particle{S,T}) where S where T = p.w * p.theta.k
@@ -32,8 +32,8 @@ using Random
 Random.seed!(777)
 
 for N in 1:Nclouds
-    abc = Cloud(smc, ESS, ESSgen, defensive=0.0, eta_min=1.0)
-    mfabc = Cloud(smc, ESS, ESSgen, defensive=0.01, eta_min=0.01)
+    abc = Cloud(smc, ESS, ESSgen, eta_min=1.0)
+    mfabc = Cloud(smc, ESS, ESSgen, eta_min=0.01)
 
     T_abc[:,N] = gettime.(abc)
     ESS_abc[:,N] = ESS.(abc)

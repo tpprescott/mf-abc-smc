@@ -73,7 +73,7 @@ end
 
 
 function step_SMC(C::Cloud{S,T}, ϵ::Float64, target::Float64) where S where T
-    q = Importance(C, defensive=0.0)
+    q = Importance(C)
     Φ = FlexiPhi(C, q)
     xmax = getepsilon(C)[1]
 
@@ -194,7 +194,7 @@ end
 ############# MF-ABC-SMC
 
 function step_MFABCSMC(C::Cloud{S,T}, ϵ::Float64, target::Float64; max_loops::Int64=5) where S where T
-    q = Importance(C, defensive=0.01)
+    q = Importance(C)
     Φ = FlexiPhi(C, q)
 
     xmax = getepsilon(C)[1]

@@ -11,7 +11,7 @@ mfabc_rs = MFABCProblem(prior, prior, (m_lo, m_hi), (y_lo, y_hi), (0.5, 0.5), Et
 
 # Initial compilation
 Cloud(abc_rs, length, 100)
-Cloud(abc_smc, length, 100, defensive=0.0, eta_min=1.0)
+Cloud(abc_smc, length, 100, eta_min=1.0)
 Cloud(mfabc_rs, length, 100)
 
 get_results(C::Cloud) = (ESS(C), gettime(C))
@@ -20,7 +20,7 @@ get_results(Cvec::Array{Cloud{T,S},1}) where T where S = (ESS(Cvec[end]), sum(ge
 using Random
 Random.seed!(666)
 C_abc_rs = Cloud(abc_rs, length, 6000)
-C_abc_smc = Cloud(abc_smc, length, 1500, defensive=0.0, eta_min=1.0)
+C_abc_smc = Cloud(abc_smc, length, 1500, eta_min=1.0)
 C_mfabc_rs = Cloud(mfabc_rs, length, 6000)
 
 results_abc_rs = get_results(C_abc_rs)
