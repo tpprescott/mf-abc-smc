@@ -65,7 +65,7 @@ end
 
 function (q::Importance{T})()::Tuple{T,Float64} where {T}
 
-    K_rand = sample(K, w)
+    K_rand = sample(q.K, q.w)
     theta::T, _ = generate(K_rand)
     prior_likelihood::Float64 = likelihood(theta, q.prior)
     prior_likelihood == 0.0 && (return q())

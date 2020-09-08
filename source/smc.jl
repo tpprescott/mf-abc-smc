@@ -63,7 +63,6 @@ function Cloud(
     smc::SMCProblem{S,T,K},
     counter::Function,
     stop_condition::Array{X,1};
-    defensive::Float64 = 0.01,
     eta_min::Float64 = 0.01,
     batch_size::Int64 = 100,
 ) where {S} where {T} where {K} where X<:Number
@@ -85,7 +84,7 @@ function Cloud(
         else
             d = defensive
         end
-        q = Importance(C[k-1], defensive = d)
+        q = Importance(C[k-1])
         e = epsilon_i(smc.epsilons, k)
         mfabc = MFABCProblem(
             smc.prior,
