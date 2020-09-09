@@ -5,7 +5,7 @@ using JLD, Plots, LaTeXStrings
 
 sch = [2.0, 1.5, 1.0, 0.8, 0.6, 0.4, 0.2, 0.1]
 Ngen = length(sch)
-Nclouds = 1
+Nclouds = 50
 ESSgen = 400.0
 
 smc = SMCProblem(prior, (y_lo, y_hi), (m_lo, m_hi), [2.0, 1.9])
@@ -69,7 +69,7 @@ for N in 1:Nclouds
 
 end
 Random.seed!()
-#=
+
 save("./data/common_schedule_smc.jld",
 "T_abc", T_abc,
 "ESS_abc", ESS_abc,
@@ -81,4 +81,3 @@ save("./data/common_schedule_smc.jld",
 "F_mfabc", F_mfabc,
 "eta_mfabc", eta_mfabc,
 )
-=#
