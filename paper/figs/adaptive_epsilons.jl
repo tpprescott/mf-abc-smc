@@ -230,7 +230,7 @@ function step_MFABCSMC(C::Cloud{S,T}, ϵ::Float64, target::Float64; max_loops::I
 end
 
 
-function DataAdaptiveEpsilonEta()
+function DataAdaptiveEpsilonEta(; max_loops=5)
 
 ϵ = [[2.0]]
 η = [[(1.0, 1.0)]]
@@ -241,7 +241,7 @@ target = efficiency(C_arr[end])
 Φvec = [FlexiPhi(C_arr[end], prior)]
 
 while (length(ϵ)<max_T)&(ϵ[end][end]>eps())
-    C_next, ϵ_steps, η_steps, Φ_next = step_MFABCSMC(C_arr[end], ϵ[end][end], target)
+    C_next, ϵ_steps, η_steps, Φ_next = step_MFABCSMC(C_arr[end], ϵ[end][end], target; max_loops=max_loops)
     push!(C_arr, C_next)
     push!(ϵ, ϵ_steps)
     push!(η, η_steps)
