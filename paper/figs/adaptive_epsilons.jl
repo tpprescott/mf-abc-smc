@@ -208,12 +208,16 @@ function step_MFABCSMC(C::Cloud{S,T}, ϵ::Float64, target::Float64; max_loops::I
         push!(η_steps, η_steps_next)
 
         f(x::Float64) = efficiency(Φ, (x, x), η_steps[end]) - target
+        f0 = f(eps())
 
         # Find ϵ that brings efficiency down to target - stop condition where epsilon doesn't decrease
-        f(eps())*f(ϵ_steps[end])<0.0 || break
-        ϵ_steps_next = round(max(eps(), fzero(f, eps(), ϵ_steps[end])), digits=2, RoundUp)
-        (ϵ_steps_next >= ϵ_steps[end]) && break
-        push!(ϵ_steps, ϵ_steps_next)
+        r = ϵ_steps[end]
+        while f0*f(r)<0.0
+            r -= 0.01
+        end
+        r += 0.01
+        r >= ϵ_steps[end] && break
+        push!(ϵ_steps, r)
 
     end
 
