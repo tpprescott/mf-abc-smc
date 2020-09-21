@@ -139,7 +139,7 @@ save("./out/pdf/posterior_abc_smc_adaptive.pdf", fig_abc)
 
 end
 
-function FigAdaptiveEpsilon(fn::String)
+function FigAdaptiveEpsilon(fn::String="./data/adaptive_epsilon.jld"; kwargs...)
 
 data = load(fn)
 ϵ = data["ϵ"]
@@ -155,13 +155,13 @@ fig = hline([target], label="", linestyle=:dot, linecolor=:black)
 
 plot!(fig; xlim=[0,xmax])
 plot!(fig, ϵ_range_prior, predicted_efficiencies_prior;
-    label=L"\hat q_1 = \pi",
+    label=L"\psi(1,1;\epsilon, \pi)",
     linecolor=1,
 )
 
 for (i,(ϵ_range_i, predicted_efficiencies_i)) in enumerate(zip(ϵ_ranges, predicted_efficiencies))
     plot!(fig, ϵ_range_i, predicted_efficiencies_i;
-        label = latexstring("\\hat q_$(i+1)"),
+        label = latexstring("\\psi(1, 1; \\epsilon, \\hat q_$(i+1))"),
         linecolor=i+1,
     )
 end
@@ -184,10 +184,11 @@ plot!(fig;
     size=(300,200),
     legend=:topleft,
     legendfontsize=8,
+    kwargs...,
 )
 
 save("./out/pdf/adaptive_epsilon.pdf", fig)
-return nothing
+return fig
 
 end
 
@@ -280,7 +281,7 @@ save("./out/pdf/posterior_mfabc_smc_adaptive.pdf", fig_mfabc)
 
 end
 
-function FigAdaptiveEpsilonEta(fn::String)
+function FigAdaptiveEpsilonEta(fn::String="./data/adaptive_epsilon_eta.jld"; kwargs...)
 
 data = load(fn)
 ϵ = data["ϵ"]
@@ -301,7 +302,7 @@ fig = hline([target];
     xlim=[0,xmax],
 )
 plot!(fig, ϵ_range_prior, predicted_efficiencies_prior;
-    label=L"\hat r_1 = \pi; (\eta_1,\eta_2)=(1.0,1.0)",
+    label=L"\psi(1, 1; \epsilon, \pi)",
     linecolor=1,
 )
 
@@ -314,15 +315,13 @@ for (i, (ϵ_range_i, predicted_efficiencies_i, η_i)) in enumerate(zip(ϵ_ranges
         )
     end
     plot!(fig, ϵ_range_i, predicted_efficiencies_i[end];
-     label=latexstring("\\hat r_$(i+1); (\\eta_1, \\eta_2)=$(round.((η_i[end]),digits=2))"),
+     label=latexstring("\\psi($(round(η_i[end][1], digits=2)), $(round(η_i[end][2], digits=2)); \\epsilon, \\hat r_$(i+1))"),
      linecolor=i+1,
      linestyle=:solid,
     )
 end
 
-epsilons = [ϵ_i[end] for ϵ_i in ϵ]
-epsilon_labels = string.(epsilons)
-epsilon_labels[3] = ""
+epsilons = round.([ϵ_i[end] for ϵ_i in ϵ], digits=2)
 
 scatter!(
     fig, epsilons, actual_efficiencies;
@@ -333,7 +332,7 @@ scatter!(
     markersize=5,
 )
 plot!(fig;
-    xticks=(epsilons, epsilon_labels),
+    xticks=(epsilons[[1,2,4]]),
     xlabel=L"\epsilon",
     yticks=0:2.5:10.0,
     ylims=(0.0,12.0),
@@ -341,8 +340,9 @@ plot!(fig;
     size=(300,200),
     legend=:topleft,
     legendfontsize=8,
+    kwargs...
 )
 save("./out/pdf/adaptive_epsilon_eta.pdf", fig)
-return nothing
+return fig
 
 end
