@@ -133,7 +133,7 @@ param_labels = [L"K", L"\omega_0", L"\gamma"]
 
 fig_abc = plot_densities(C_arr[end], param_ranges,
     param_labels=param_labels,
-    fn="/figs/data_abc_smc_adaptive",
+    fn="data_abc_smc_adaptive",
     )
 save("./out/pdf/posterior_abc_smc_adaptive.pdf", fig_abc)
 
@@ -275,7 +275,7 @@ param_labels = [L"K", L"\omega_0", L"\gamma"]
 
 fig_mfabc = plot_densities(C_arr[end], param_ranges,
     param_labels=param_labels,
-    fn="/figs/data_mfabc_smc_adaptive",
+    fn="data_mfabc_smc_adaptive",
     )
 save("./out/pdf/posterior_mfabc_smc_adaptive.pdf", fig_mfabc)
 
